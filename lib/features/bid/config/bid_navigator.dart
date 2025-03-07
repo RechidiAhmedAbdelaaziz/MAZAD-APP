@@ -23,7 +23,7 @@ class BidNavigator extends AppNavigatorBase {
                 (context) =>
                     BidsCubit(state.pathParameters['productId']!)
                       ..getBids(),
-            child: BidsScreen(),
+            child: BidsWidget(),
           ),
     ),
   ];

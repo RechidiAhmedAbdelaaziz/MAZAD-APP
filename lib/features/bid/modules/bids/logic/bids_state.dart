@@ -17,19 +17,7 @@ class BidsState extends ErrorState {
 
   bool get isLoading => _status == _BidsStatus.loading;
 
-  factory BidsState.initial() => BidsState(
-    bids: [
-      BidModel(
-        quantity: 12,
-        amount: 1000,
-        user: UserModel(
-          name: "Rechidi",
-          phone: "0555555555",
-          region: 'Oran',
-        ),
-      ),
-    ],
-  );
+  factory BidsState.initial() => BidsState(bids: []);
 
   BidsState _loading() => _copyWith(status: _BidsStatus.loading);
 

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mazad_app/core/extension/dialog.extension.dart';
 import 'package:mazad_app/core/extension/localization.extension.dart';
 import 'package:mazad_app/core/extension/navigator.extension.dart';
 import 'package:mazad_app/core/shared/classes/dimensions.dart';
 import 'package:mazad_app/core/shared/widgets/pagination_builder.dart';
 import 'package:mazad_app/core/themes/colors.dart';
-import 'package:mazad_app/features/bid/config/bid_navigator.dart';
 import 'package:mazad_app/features/products/config/products_navigator.dart';
 import 'package:mazad_app/features/products/data/models/product_model.dart';
 import 'package:mazad_app/features/products/modules/products/logic/products_cubit.dart';
@@ -21,28 +19,21 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Products'.tr(context)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              context.toWith<ProductModel>(
-                ProductNavigator.createProduct(),
-                onResult: context.read<ProductsCubit>().addProduct,
-              );
-            },
-          ),
-        ],
+        actions: [],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: 24.w,
           vertical: 8.h,
         ),
-        child: PaginationBuilder(
+        child: PaginationGridBuilder(
           items: products,
           itemBuilder:
               (product) => InkWell(
-                onTap: () => context.to(BidNavigator.bids(product)),
+                onTap:
+                    () => context.to(
+                      ProductNavigator.productDetail(product),
+                    ),
                 child: _buildProductItem(product, context),
               ),
           isLoading: context.select(
@@ -60,90 +51,94 @@ class ProductsScreen extends StatelessWidget {
     BuildContext context,
   ) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16).r,
-        border: Border.all(color: KColors.dark),
+        color: KColors.white,
+        borderRadius: BorderRadius.circular(20).r,
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x3F000000),
+            blurRadius: 6,
+            offset: Offset(0, 0),
+            spreadRadius: 0,
+          ),
+        ],
       ),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 60.r,
-            width: 60.r,
+            height: 190.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16).r,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
               image: DecorationImage(
-                image: NetworkImage(
-                  product.images?.firstOrNull ?? '',
-                ),
+                image: NetworkImage(product.images?.first ?? ''),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          widthSpace(16),
-          Expanded(
+
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 12.w,
+              vertical: 8.h,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+
+              spacing: 10.h,
               children: [
                 Text(
                   product.name ?? '',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                heightSpace(8),
-                Text(
-                  product.category?.tr(context) ?? '',
-                  overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                ),
-                heightSpace(4),
-                Text(
-                  '${product.price} DZD',
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: KColors.dark,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
+                Text(
+                  '${'Quantity'.tr(context)}: ${product.stock ?? 0}',
+                  style: TextStyle(
+                    color: KColors.darkGrey,
+                    fontSize: 15.sp,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '${product.price ?? 0} DA',
+                      style: TextStyle(
+                        color: KColors.dark,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Spacer(),
+                    //show more button
+                    InkWell(
+                      onTap:
+                          () => context.to(
+                            ProductNavigator.productDetail(product),
+                          ),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: KColors.primary,
+                        size: 20.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                heightSpace(0),
               ],
             ),
-          ),
-          PopupMenuButton(
-            itemBuilder: (context) => _buildOptions(context, product),
           ),
         ],
       ),
     );
-  }
-
-  List<PopupMenuEntry> _buildOptions(
-    BuildContext context,
-    ProductModel product,
-  ) {
-    return [
-      PopupMenuItem(
-        child: Text('Edit'.tr(context)),
-        onTap:
-            () => context.toWith<ProductModel>(
-              ProductNavigator.editProduct(product),
-              onResult: context.read<ProductsCubit>().updateProduct,
-            ),
-      ),
-      PopupMenuItem(
-        child: Text('Delete'.tr(context)),
-        onTap:
-            () => context.alertDialog(
-              title: 'Delete'.tr(context),
-              content: 'DeleteConfirmation'.tr(context),
-              onConfirm:
-                  () => context.read<ProductsCubit>().removeProduct(
-                    product,
-                  ),
-            ),
-      ),
-    ];
   }
 }

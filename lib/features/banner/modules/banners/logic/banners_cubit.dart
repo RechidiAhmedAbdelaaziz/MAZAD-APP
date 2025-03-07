@@ -31,20 +31,5 @@ class BannersCubit extends Cubit<BannersState> {
     );
   }
 
-  void addBanner(BannerModel banner) =>
-      emit(state._addBanner(banner));
 
-  void removeBanner(BannerModel banner) async {
-    emit(state._loading());
-
-    final result = await _bannerRepo.deleteBanner(banner);
-
-    result.when(
-      success: (_) => emit(state._removeBanner(banner)),
-      error: (error) => emit(state._error(error.message)),
-    );
-  }
-
-  void updateBanner(BannerModel banner) =>
-      emit(state._updateBanner(banner));
 }

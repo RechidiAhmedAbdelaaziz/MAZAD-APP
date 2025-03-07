@@ -7,7 +7,7 @@ import 'package:mazad_app/features/products/data/models/product_model.dart';
 import 'package:mazad_app/features/products/modules/products/logic/products_cubit.dart';
 import 'package:mazad_app/features/products/modules/products/ui/products_screen.dart';
 import 'package:mazad_app/features/products/modules/produt/logic/product_cubit.dart';
-import 'package:mazad_app/features/products/modules/produt/ui/product_form_screen.dart';
+import 'package:mazad_app/features/products/modules/produt/ui/product_details.dart';
 
 class ProductNavigator extends AppNavigatorBase {
   ProductNavigator.products(AuctionModel auction)
@@ -20,15 +20,6 @@ class ProductNavigator extends AppNavigatorBase {
     : super(
         name: AppRoutes.product,
         pathParams: {'productId': auction.id!},
-      );
-
-  ProductNavigator.createProduct()
-    : super(name: AppRoutes.productCreate);
-
-  ProductNavigator.editProduct(ProductModel product)
-    : super(
-        name: AppRoutes.productUpdate,
-        pathParams: {'productId': product.id!},
       );
 
   static List<GoRoute> routes = [
@@ -46,25 +37,16 @@ class ProductNavigator extends AppNavigatorBase {
     ),
 
     GoRoute(
-      name: AppRoutes.productCreate,
-      path: '/product-form',
-      builder:
-          (context, state) => BlocProvider(
-            create: (_) => ProductCubit()..loadDto(),
-            child: ProductFormScreen(),
-          ),
-    ),
-
-    GoRoute(
-      name: AppRoutes.productUpdate,
-      path: '/product-form/:productId',
+      name: AppRoutes.product,
+      path: '/products/:productId',
       builder:
           (context, state) => BlocProvider(
             create:
                 (_) =>
-                    ProductCubit()
-                      ..loadDto(state.pathParameters['productId']!),
-            child: ProductFormScreen(),
+                    ProductCubit()..loadProduct(
+                      state.pathParameters['productId']!,
+                    ),
+            child: ProductDetails(),
           ),
     ),
   ];

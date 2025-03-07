@@ -7,10 +7,12 @@ import 'package:mazad_app/core/extension/localization.extension.dart';
 import 'package:mazad_app/core/extension/navigator.extension.dart';
 import 'package:mazad_app/core/shared/classes/dimensions.dart';
 import 'package:mazad_app/core/shared/widgets/submit_button.dart';
+import 'package:mazad_app/core/shared/widgets/text_button.dart';
 import 'package:mazad_app/core/shared/widgets/text_form_field.dart';
 import 'package:mazad_app/core/themes/colors.dart';
 import 'package:mazad_app/core/themes/icons.dart';
 import 'package:mazad_app/features/auction/config/auction_navigator.dart';
+import 'package:mazad_app/features/auth/config/auth.navigator.dart';
 import 'package:mazad_app/features/auth/modules/login/logic/login.cubit.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -21,7 +23,9 @@ class LoginScreen extends StatelessWidget {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         state.onError(context.showErrorDialog);
-        state.onSuccess(() => context.offAll(AuctionNavigator.auctions()));
+        state.onSuccess(
+          () => context.offAll(AuctionNavigator.auctions()),
+        );
       },
       child: Scaffold(
         backgroundColor: KColors.background,
@@ -67,25 +71,27 @@ class LoginScreen extends StatelessWidget {
                   },
                 ),
                 heightSpace(16),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   spacing: 2.w,
-                //   children: [
-                //     Text(
-                //       'DontHaveAccount'.tr(context),
-                //       style: TextStyle(
-                //         color: KColors.white,
-                //         fontSize: 15.sp,
-                //         fontWeight: FontWeight.w500,
-                //       ),
-                //     ),
-                //     AppTextButton(
-                //       title: 'Register'.tr(context),
-                //       color: KColors.primary,
-                //       onTap: () => context.off(AuthNavigator.signup()),
-                //     ),
-                //   ],
-                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 2.w,
+                  children: [
+                    Text(
+                      'DontHaveAccount'.tr(context),
+                      style: TextStyle(
+                        color: KColors.white,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    AppTextButton(
+                      title: 'Register'.tr(context),
+                      color: KColors.primary,
+                      onTap:
+                          () =>
+                              context.offAll(AuthNavigator.signup()),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

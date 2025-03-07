@@ -5,11 +5,11 @@ part of 'product_cubit.dart';
 enum _ProductStatus { initial, loading, loaded, saved, error }
 
 class ProductState extends ErrorState {
-  final ProductDto? _dto;
+  final ProductModel? _dto;
   final _ProductStatus _status;
 
   ProductState({
-    ProductDto? dto,
+    ProductModel? dto,
     _ProductStatus status = _ProductStatus.initial,
     String? error,
   }) : _status = status,
@@ -19,24 +19,22 @@ class ProductState extends ErrorState {
   bool get isLoading => _status == _ProductStatus.loading;
   bool get isLoaded => _dto != null;
 
-  ProductDto get dto => _dto!;
+  ProductModel get product => _dto!;
 
   factory ProductState.initial() => ProductState();
 
   ProductState _loading() =>
       _copyWith(status: _ProductStatus.loading);
 
-  ProductState _loaded(ProductDto dto) =>
+  ProductState _loaded(ProductModel dto) =>
       _copyWith(dto: dto, status: _ProductStatus.loaded);
 
-  ProductState _saved(ProductModel product) =>
-      _SavedProductState(product, this);
 
   ProductState _error(String error) =>
       _copyWith(error: error, status: _ProductStatus.error);
 
   ProductState _copyWith({
-    ProductDto? dto,
+    ProductModel? dto,
     _ProductStatus? status,
     String? error,
   }) {
@@ -48,15 +46,4 @@ class ProductState extends ErrorState {
   }
 
   void onSave(ValueChanged<ProductModel> callback) {}
-}
-
-class _SavedProductState extends ProductState {
-  final ProductModel _product;
-
-  _SavedProductState(this._product, ProductState state)
-    : super(dto: state._dto, status: _ProductStatus.saved);
-
-  @override
-  void onSave(ValueChanged<ProductModel> callback) =>
-      callback(_product);
 }

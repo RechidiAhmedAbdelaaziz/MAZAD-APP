@@ -27,20 +27,6 @@ class BannersState extends ErrorState {
     status: _BannersStatus.loaded,
   );
 
-  BannersState _addBanner(BannerModel banner) => _copyWith(
-    banners: banners.withUnique(banner),
-    status: _BannersStatus.loaded,
-  );
-
-  BannersState _removeBanner(BannerModel banner) => _copyWith(
-    banners: banners.without(banner),
-    status: _BannersStatus.loaded,
-  );
-
-  BannersState _updateBanner(BannerModel banner) => _copyWith(
-    banners: banners.withReplace(banner),
-    status: _BannersStatus.loaded,
-  );
 
   BannersState _error(String error) =>
       _copyWith(error: error, status: _BannersStatus.error);

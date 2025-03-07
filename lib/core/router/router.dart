@@ -7,7 +7,6 @@ import 'package:mazad_app/core/di/locator.dart';
 import 'package:mazad_app/features/auction/config/auction_route.dart';
 import 'package:mazad_app/features/auth/config/auth.route.dart';
 import 'package:mazad_app/features/auth/logic/auth.cubit.dart';
-import 'package:mazad_app/features/banner/config/banner_navigator.dart';
 import 'package:mazad_app/features/bid/config/bid_navigator.dart';
 import 'package:mazad_app/features/home/config/home_navigator.dart';
 import 'package:mazad_app/features/products/config/products_navigator.dart';
@@ -21,7 +20,6 @@ class AppRouter {
     routes: [
       ...AuthRoute.routes,
       ...AuctionRoute.routes,
-      ...BannerNavigator.routes,
       ...HomeNavigator.routes,
       ...ProductNavigator.routes,
       ...BidNavigator.routes,
