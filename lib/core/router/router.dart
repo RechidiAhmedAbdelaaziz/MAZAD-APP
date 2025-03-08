@@ -20,7 +20,7 @@ class AppRouter {
     routes: [
       ...AuthRoute.routes,
       ...AuctionRoute.routes,
-      ...HomeNavigator.routes,
+      HomeNavigator.route,
       ...ProductNavigator.routes,
       ...BidNavigator.routes,
     ],
@@ -33,7 +33,9 @@ class AppRouter {
     BuildContext context,
     GoRouterState state,
   ) async {
-    if (AppRoutes.authPaths.contains(state.matchedLocation)) return null;
+    if (AppRoutes.authPaths.contains(state.matchedLocation)) {
+      return null;
+    }
 
     final authCubit = locator<AuthCubit>();
     if (await authCubit.isAuthenticated) return null;

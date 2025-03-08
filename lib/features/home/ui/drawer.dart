@@ -3,6 +3,11 @@ part of 'home_screen.dart';
 class _Drawer extends StatelessWidget {
   const _Drawer();
 
+  void _showPage(BuildContext context, VoidCallback routing) {
+    routing();
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,11 +24,20 @@ class _Drawer extends StatelessWidget {
               _DrawerItem(
                 prefix: Icon(Icons.home, color: KColors.white),
                 title: 'Home'.tr(context),
-                onTap: () => context.offAll(HomeNavigator()),
+                onTap:
+                    () => _showPage(
+                      context,
+                      () => context.off(HomeNavigator()),
+                    ),
               ),
               _DrawerItem(
                 prefix: Icon(Icons.person, color: KColors.white),
                 title: 'Profile'.tr(context),
+                onTap:
+                    () => _showPage(
+                      context,
+                      () => context.off(UserNavigator.profile()),
+                    ),
               ),
               _DrawerItem(
                 prefix: Icon(

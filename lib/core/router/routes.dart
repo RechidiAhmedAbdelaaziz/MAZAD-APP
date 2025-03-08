@@ -34,4 +34,7 @@ abstract class AppRoutes {
 
   //* BID ROUTES
   static const String bids = 'BIDS';
+
+  //* USER ROUTES
+  static const String profile = 'PROFILE';
 }

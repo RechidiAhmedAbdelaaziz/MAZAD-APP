@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,8 +36,6 @@ class AppTextFormField extends StatefulWidget {
     this.maxLength,
   });
 
-  
-
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
 }
@@ -67,7 +66,8 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           child: TextFormField(
             inputFormatters: widget.inputFormatters,
             controller: widget.controller,
-            validator: widget.validator,
+            validator:
+                (_) => widget.validator?.call(widget.controller.text),
             onChanged: widget.onChanged,
             obscureText: widget.obscureText ? _obscureText : false,
             keyboardType: widget.keyboardType,

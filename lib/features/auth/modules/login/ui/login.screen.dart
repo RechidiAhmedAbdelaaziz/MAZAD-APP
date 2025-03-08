@@ -11,9 +11,9 @@ import 'package:mazad_app/core/shared/widgets/text_button.dart';
 import 'package:mazad_app/core/shared/widgets/text_form_field.dart';
 import 'package:mazad_app/core/themes/colors.dart';
 import 'package:mazad_app/core/themes/icons.dart';
-import 'package:mazad_app/features/auction/config/auction_navigator.dart';
 import 'package:mazad_app/features/auth/config/auth.navigator.dart';
 import 'package:mazad_app/features/auth/modules/login/logic/login.cubit.dart';
+import 'package:mazad_app/features/home/config/home_navigator.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         state.onError(context.showErrorDialog);
         state.onSuccess(
-          () => context.offAll(AuctionNavigator.auctions()),
+          () => context.offAll(HomeNavigator()),
         );
       },
       child: Scaffold(

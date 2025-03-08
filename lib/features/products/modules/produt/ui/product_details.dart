@@ -132,7 +132,7 @@ class ProductDetails extends StatelessWidget {
               Spacer(),
               InkWell(
                 onTap: () {
-                  context.dialogWith<void>(
+                  context.dialogWith<bool>(
                     child: BlocProvider(
                       create:
                           (context) => BidCubit(
@@ -145,15 +145,11 @@ class ProductDetails extends StatelessWidget {
                         quantity: product.stock ?? 0,
                       ),
                     ),
-                    onResult: (_) {},
-                    onError: () {
-                      print(
-                        ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Bid Saved",
-                      );
+                    onResult: (_) {
+                      context.refresh();
                       context.showSuccessSnackbar(
                         'BidSaved'.tr(context),
                       );
-                      context.refresh();
                     },
                   );
                 },

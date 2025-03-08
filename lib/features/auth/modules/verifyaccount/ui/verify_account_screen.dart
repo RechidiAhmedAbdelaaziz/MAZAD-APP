@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mazad_app/core/extension/localization.extension.dart';
+import 'package:mazad_app/core/extension/navigator.extension.dart';
 import 'package:mazad_app/core/extension/snackbar.extension.dart';
 import 'package:mazad_app/core/shared/classes/dimensions.dart';
 import 'package:mazad_app/core/shared/widgets/submit_button.dart';
 import 'package:mazad_app/core/shared/widgets/text_button.dart';
 import 'package:mazad_app/core/shared/widgets/text_form_field.dart';
 import 'package:mazad_app/core/themes/icons.dart';
+import 'package:mazad_app/features/home/config/home_navigator.dart';
 
 import '../logic/verify_account_cubit.dart';
 
@@ -26,9 +28,7 @@ class VerifyAccountScreen extends StatelessWidget {
           () => context.showSuccessSnackbar('OtpSent'.tr(context)),
         );
 
-        state.onSucess(() {
-          //TODO go to home screen
-        });
+        state.onSucess(() => context.offAll(HomeNavigator()));
 
         state.onError(context.showErrorSnackbar);
       },

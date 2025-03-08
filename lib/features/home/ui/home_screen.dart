@@ -10,6 +10,7 @@ import 'package:mazad_app/core/themes/colors.dart';
 import 'package:mazad_app/core/themes/icons.dart';
 import 'package:mazad_app/features/auth/logic/auth.cubit.dart';
 import 'package:mazad_app/features/home/config/home_navigator.dart';
+import 'package:mazad_app/features/user/config/user_navigator.dart';
 
 part 'drawer.dart';
 
@@ -22,9 +23,20 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: SvgPicture.asset(AppAssets.logo, width: 120.w),
+
         centerTitle: true,
         backgroundColor: KColors.black,
         actions: [],
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: Icon(Icons.menu, color: KColors.primary),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () async {

@@ -9,38 +9,39 @@ import 'package:mazad_app/features/auction/modules/auctions/ui/auctions_screen.d
 import 'package:mazad_app/features/banner/modules/banners/logic/banners_cubit.dart';
 import 'package:mazad_app/features/banner/modules/banners/ui/banners_widget.dart';
 import 'package:mazad_app/features/home/ui/home_screen.dart';
+import 'package:mazad_app/features/user/config/user_navigator.dart';
 
 class HomeNavigator extends AppNavigatorBase {
   HomeNavigator() : super(name: AppRoutes.home);
 
-  static List<RouteBase> routes = [
-    ShellRoute(
-      builder:
-          (context, state, child) => HomeScreen(currentScreen: child),
-      routes: [
-        GoRoute(
-          path: '/',
-          name: AppRoutes.home,
-          builder:
-              (context, state) => MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create: (context) => BannersCubit()..getBanners(),
-                  ),
-                  BlocProvider(
-                    create: (context) => AuctionsCubit()..load(),
-                  ),
-                ],
-                child: Column(
-                  children: [
-                    BannerWidget(),
-                    heightSpace(12),
-                    Expanded(child: AuctionsScreen()),
-                  ],
+  static RouteBase route = ShellRoute(
+    builder:
+        (context, state, child) => HomeScreen(currentScreen: child),
+    routes: [
+      GoRoute(
+        path: '/',
+        name: AppRoutes.home,
+        builder:
+            (context, state) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => BannersCubit()..getBanners(),
                 ),
+                BlocProvider(
+                  create: (context) => AuctionsCubit()..load(),
+                ),
+              ],
+              child: Column(
+                children: [
+                  BannerWidget(),
+                  heightSpace(12),
+                  Expanded(child: AuctionsScreen()),
+                ],
               ),
-        ),
-      ],
-    ),
-  ];
+            ),
+      ),
+      
+      ...UserNavigator.routes,
+    ],
+  );
 }

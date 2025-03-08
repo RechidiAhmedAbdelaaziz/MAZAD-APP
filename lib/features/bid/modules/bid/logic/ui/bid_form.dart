@@ -30,7 +30,7 @@ class BidForm extends StatelessWidget {
     return BlocListener<BidCubit, BidState>(
       listener: (context, state) {
         state.onError(context.showErrorSnackbar);
-        state.onSave(context.back);
+        state.onSave(() => context.back(true));
       },
       child: Container(
         width: double.infinity,
