@@ -11,7 +11,7 @@ import 'package:mazad_app/core/themes/colors.dart';
 import 'package:mazad_app/features/bid/modules/bid/logic/bid_cubit.dart';
 import 'package:mazad_app/features/bid/modules/bid/logic/ui/bid_form.dart';
 import 'package:mazad_app/features/bid/modules/bids/logic/bids_cubit.dart';
-import 'package:mazad_app/features/bid/modules/bids/ui/bids_screen.dart';
+import 'package:mazad_app/features/bid/modules/bids/ui/bids_widget.dart';
 import 'package:mazad_app/features/products/data/models/product_model.dart';
 import 'package:mazad_app/features/products/modules/produt/logic/product_cubit.dart';
 
@@ -194,10 +194,7 @@ class ProductDetails extends StatelessWidget {
         );
       },
 
-      items: [
-        ...product.images ?? <String>[],
-        ...product.images ?? <String>[],
-      ],
+      items: [...product.images ?? <String>[]],
     );
   }
 }

@@ -15,7 +15,12 @@ abstract class BidApi {
   @GET('/bids/product/{productId}')
   Future<PaginatedDataResponse> getBids(
     @Path('productId') String productId,
-    @Body() Map<String, dynamic> body,
+    @Queries() Map<String, dynamic> body,
+  );
+
+  @GET('/bids/me')
+  Future<PaginatedDataResponse> getMyBids(
+    @Queries() Map<String, dynamic> body,
   );
 
   @GET('/bids/{bidId}')

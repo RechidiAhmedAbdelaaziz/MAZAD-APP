@@ -8,6 +8,7 @@ import 'package:mazad_app/features/auction/modules/auctions/logic/auctions_cubit
 import 'package:mazad_app/features/auction/modules/auctions/ui/auctions_screen.dart';
 import 'package:mazad_app/features/banner/modules/banners/logic/banners_cubit.dart';
 import 'package:mazad_app/features/banner/modules/banners/ui/banners_widget.dart';
+import 'package:mazad_app/features/bid/config/bid_navigator.dart';
 import 'package:mazad_app/features/home/ui/home_screen.dart';
 import 'package:mazad_app/features/user/config/user_navigator.dart';
 
@@ -40,8 +41,9 @@ class HomeNavigator extends AppNavigatorBase {
               ),
             ),
       ),
-      
+
       ...UserNavigator.routes,
+      ...BidNavigator.routes,
     ],
   );
 }

@@ -45,6 +45,11 @@ class _Drawer extends StatelessWidget {
                   color: KColors.white,
                 ),
                 title: 'MyOffers'.tr(context),
+                onTap:
+                    () => _showPage(
+                      context,
+                      () => context.off(BidNavigator.myBids()),
+                    ),
               ),
               _DrawerItem(
                 prefix: Icon(Icons.language, color: KColors.white),

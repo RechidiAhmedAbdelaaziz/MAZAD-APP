@@ -12,18 +12,16 @@ class BidNavigator extends AppNavigatorBase {
         name: AppRoutes.bids,
         pathParams: {'productId': product.id.toString()},
       );
+  BidNavigator.myBids() : super(name: AppRoutes.myBids);
 
   static List<GoRoute> routes = [
     GoRoute(
-      path: '/bids/:productId',
-      name: AppRoutes.bids,
+      path: '/my-bids',
+      name: AppRoutes.myBids,
       builder:
           (context, state) => BlocProvider(
-            create:
-                (context) =>
-                    BidsCubit(state.pathParameters['productId']!)
-                      ..getBids(),
-            child: BidsWidget(),
+            create: (context) => MyBidsCubit()..getBids(),
+            child: BidsScreen(),
           ),
     ),
   ];

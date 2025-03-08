@@ -22,6 +22,16 @@ class BidRepo extends NetworkRepository {
     });
   }
 
+  RepoListResult<BidModel> getMyBids(PaginationDto dto) {
+    return tryApiCall(() async {
+      final response = await _bidApi.getMyBids(dto.toJson());
+      return PaginationResult.fromResponse(
+        response: response,
+        fromJson: (json) => BidModel.fromJson(json),
+      );
+    });
+  }
+
   RepoResult<BidModel> getBid(String bidId) {
     return tryApiCall(() async {
       final response = await _bidApi.getBid(bidId);
@@ -29,10 +39,7 @@ class BidRepo extends NetworkRepository {
     });
   }
 
-  RepoResult<BidModel> createBid(
-    String productId,
-    CreateBidDto dto,
-  ) {
+  RepoResult<BidModel> createBid(String productId, CreateBidDto dto) {
     return tryApiCall(() async {
       final response = await _bidApi.createBid(
         productId,

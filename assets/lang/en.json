@@ -15,7 +15,7 @@
     "MyOffers": "My Offers",
     "Language": "Language",
     "Home": "Home",
-    "EndsAt": "Ends at :",
+    "EndsAt": "Ends at:",
     "ShowProducts": "Show Products",
     "Quantity": "Quantity",
     "InStock": "In Stock",
@@ -23,7 +23,7 @@
     "YourOffer": "Your Offer",
     "IncrementBy": "Increment By",
     "BidSaved": "Bid saved successfully",
-    "ForgetPassword": "Forget Password",
+    "ForgetPassword": "Forgot Password",
     "Login": "Login",
     "InvalidOtp": "Invalid OTP",
     "AlreadyHaveAccount": "Already have an account?",
@@ -65,7 +65,7 @@
     "Wilaya": "Wilaya",
     "ConfirmPassword": "Confirm Password",
     "Password": "Password",
-    "InvalidPassword": "Password must be at least 6 characters long , contain at least one uppercase letter, one lowercase letter, one number and one special character",
+    "InvalidPassword": "Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
     "Automotive": "Automotive",
     "Cars & Vehicles": "Cars & Vehicles",
     "SavedSuccessfully": "Saved successfully",
@@ -152,5 +152,6 @@
     "Industrial & Business Supplies": "Industrial & Business Supplies",
     "Office Equipment": "Office Equipment",
     "Packaging & Shipping": "Packaging & Shipping",
-    "Electrical & Hardware": "Electrical & Hardware"
+    "Electrical & Hardware": "Electrical & Hardware",
+    "OffersProposed": "Offers Proposed"
 }

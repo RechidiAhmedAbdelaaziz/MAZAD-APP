@@ -23,7 +23,30 @@ class BidsCubit extends Cubit<BidsState> {
       success: (result) {
         final bids = result.data;
 
-        
+        emit(state._loaded(bids));
+      },
+      error: (error) {
+        emit(state._error(error.message));
+      },
+    );
+  }
+}
+
+class MyBidsCubit extends Cubit<BidsState> {
+  final _bidRepo = locator<BidRepo>();
+  final _paginationDto = PaginationDto(limit: 10);
+
+  MyBidsCubit() : super(BidsState.initial());
+
+  void getBids() async {
+    emit(state._loading());
+    final result = await _bidRepo.getMyBids(_paginationDto);
+
+    result.when(
+      success: (result) {
+        final bids = result.data;
+
+        if (bids.isNotEmpty) _paginationDto.nextPage();
 
         emit(state._loaded(bids));
       },
