@@ -64,8 +64,9 @@ class _AppPageViewState<T> extends State<AppPageView<T>> {
 
   @override
   void dispose() {
-    super.dispose();
     _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -80,10 +81,10 @@ class _AppPageViewState<T> extends State<AppPageView<T>> {
             controller: _pageController,
             itemBuilder: (context, index) {
               return AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
+                duration: Duration(milliseconds: 200),
                 opacity: _currentIndex == index ? 1 : 0.5,
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: 500),
+                  duration: Duration(milliseconds: 200),
                   curve: Curves.easeIn,
                   margin:
                       _currentIndex != index

@@ -23,7 +23,7 @@ class BidsCubit extends Cubit<BidsState> {
       success: (result) {
         final bids = result.data;
 
-        if (bids.isNotEmpty) _paginationDto.nextPage();
+        
 
         emit(state._loaded(bids));
       },

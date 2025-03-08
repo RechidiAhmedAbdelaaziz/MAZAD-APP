@@ -13,25 +13,29 @@ class _Drawer extends StatelessWidget {
           vertical: 70.h,
         ),
         child: Column(
-          spacing:  15.h,
+          spacing: 15.h,
           children: [
             ...[
               _DrawerItem(
                 prefix: Icon(Icons.home, color: KColors.white),
                 title: 'Home'.tr(context),
+                onTap: () => context.offAll(HomeNavigator()),
               ),
               _DrawerItem(
                 prefix: Icon(Icons.person, color: KColors.white),
                 title: 'Profile'.tr(context),
               ),
               _DrawerItem(
-                prefix: Icon(Icons.attach_money_rounded, color: KColors.white),
+                prefix: Icon(
+                  Icons.attach_money_rounded,
+                  color: KColors.white,
+                ),
                 title: 'MyOffers'.tr(context),
               ),
               _DrawerItem(
                 prefix: Icon(Icons.language, color: KColors.white),
                 title: 'Language'.tr(context),
-                suffix: LocalizationButton()
+                suffix: LocalizationButton(),
               ),
             ].map(_buildDrawerItem),
 
@@ -45,7 +49,7 @@ class _Drawer extends StatelessWidget {
               ),
             ].map(_buildDrawerItem),
           ],
-        ),    
+        ),
       ),
     );
   }

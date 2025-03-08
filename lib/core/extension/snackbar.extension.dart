@@ -10,6 +10,8 @@ extension SnackbarExtension on BuildContext {
   ) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
+        backgroundColor: color,
+        duration: Duration(seconds: 1),
         content: Row(
           children: [
             Icon(icon, color: textColor),

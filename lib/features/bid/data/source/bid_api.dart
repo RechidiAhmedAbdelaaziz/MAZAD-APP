@@ -17,4 +17,19 @@ abstract class BidApi {
     @Path('productId') String productId,
     @Body() Map<String, dynamic> body,
   );
+
+  @GET('/bids/{bidId}')
+  Future<SingleDataResponse> getBid(@Path('bidId') String bidId);
+
+  @POST('/bids/{productId}')
+  Future<SingleDataResponse> createBid(
+    @Path('productId') String productId,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @PATCH('/bids/{bidId}')
+  Future<SingleDataResponse> updateBid(
+    @Path('bidId') String bidId,
+    @Body() Map<String, dynamic> body,
+  );
 }

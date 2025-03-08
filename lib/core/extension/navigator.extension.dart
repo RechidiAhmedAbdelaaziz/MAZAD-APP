@@ -41,4 +41,8 @@ extension NavigatorExtension on BuildContext {
   }
 
   void back<T>([T? result]) => Navigator.of(this).pop(result);
+
+  void refresh() => GoRouter.of(
+    this,
+  ).pushReplacement(GoRouter.of(this).state.matchedLocation);
 }

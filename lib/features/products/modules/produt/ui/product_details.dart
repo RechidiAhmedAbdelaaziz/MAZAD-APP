@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mazad_app/core/extension/dialog.extension.dart';
 import 'package:mazad_app/core/extension/localization.extension.dart';
 import 'package:mazad_app/core/extension/navigator.extension.dart';
 import 'package:mazad_app/core/extension/snackbar.extension.dart';
 import 'package:mazad_app/core/shared/classes/dimensions.dart';
 import 'package:mazad_app/core/shared/widgets/auto_page_view.dart';
 import 'package:mazad_app/core/themes/colors.dart';
+import 'package:mazad_app/features/bid/modules/bid/logic/bid_cubit.dart';
+import 'package:mazad_app/features/bid/modules/bid/logic/ui/bid_form.dart';
 import 'package:mazad_app/features/bid/modules/bids/logic/bids_cubit.dart';
 import 'package:mazad_app/features/bid/modules/bids/ui/bids_screen.dart';
 import 'package:mazad_app/features/products/data/models/product_model.dart';
@@ -128,6 +131,32 @@ class ProductDetails extends StatelessWidget {
               ),
               Spacer(),
               InkWell(
+                onTap: () {
+                  context.dialogWith<void>(
+                    child: BlocProvider(
+                      create:
+                          (context) => BidCubit(
+                            product.id!,
+                            price: product.price ?? 0,
+                          )..loadDto(),
+
+                      child: BidForm(
+                        amounts: product.suggestedPrices ?? [],
+                        quantity: product.stock ?? 0,
+                      ),
+                    ),
+                    onResult: (_) {},
+                    onError: () {
+                      print(
+                        ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Bid Saved",
+                      );
+                      context.showSuccessSnackbar(
+                        'BidSaved'.tr(context),
+                      );
+                      context.refresh();
+                    },
+                  );
+                },
                 child: Container(
                   padding: EdgeInsets.all(12.r),
                   decoration: BoxDecoration(

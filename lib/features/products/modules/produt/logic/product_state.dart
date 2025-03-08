@@ -2,7 +2,7 @@
 
 part of 'product_cubit.dart';
 
-enum _ProductStatus { initial, loading, loaded, saved, error }
+enum _ProductStatus { initial, loading, loaded, error }
 
 class ProductState extends ErrorState {
   final ProductModel? _dto;
@@ -28,7 +28,6 @@ class ProductState extends ErrorState {
 
   ProductState _loaded(ProductModel dto) =>
       _copyWith(dto: dto, status: _ProductStatus.loaded);
-
 
   ProductState _error(String error) =>
       _copyWith(error: error, status: _ProductStatus.error);

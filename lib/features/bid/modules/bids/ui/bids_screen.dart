@@ -13,9 +13,7 @@ class BidsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bids = context.select(
-      (BidsCubit cubit) => cubit.state.bids,
-    );
+    final bids = context.watch<BidsCubit>().state.bids;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child:
